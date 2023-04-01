@@ -1,0 +1,16 @@
+{
+  "name": "simple-authorization",
+  "version": "1.0.0",
+  "description": "This project implements a simple authentication and autherization using 'koa' library",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js --watch",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.14.1"
+  }
+}
