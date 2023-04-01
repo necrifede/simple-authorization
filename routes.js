@@ -5,9 +5,18 @@ const { update, write, read } = require('./messages')
 const router = new Router();
 
 router.get('/stats', (ctx, next) => {
-  const stats = read()
-  ctx.status = 200
-  ctx.body = stats
+
+  try {
+    if (ctx.state.user !== 'admin') {
+      throw Error('Unauthorized request')
+    }
+    const stats = read()
+    ctx.status = 200
+    ctx.body = stats
+  } catch (error) {
+    ctx.body = { succeed: false, message: `error: ${error}` };
+    ctx.status = 401;
+  }
 });
 
 router.post('/message', (ctx, next) => {
