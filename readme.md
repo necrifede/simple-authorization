@@ -3,20 +3,20 @@ basic endpoints are published.
 
 # Tasks
 
-- [ ] Create a new REST API application using Koa (https://github.com/koajs/koa) and modern Javascript (ES6) with 2 end points.
-  - [ ] POST /message
+- [x] Create a new REST API application using Koa (https://github.com/koajs/koa) and modern Javascript (ES6) with 2 end points.
+  - [x] POST /message
   ```json
   {
-  "from": string,
-  "to": string,
-  "message": string
+  "from": "string",
+  "to": "string",
+  "message": "string"
   }
   ```
-  - [ ] GET /stats
+  - [x] GET /stats
   ```json
   {
-  "numberOfCalls": Number,
-  "lastMessage": Object
+  "numberOfCalls": "Number",
+  "lastMessage": "Object"
   }
   ```
 - [ ] The application will preserve in a json file the number of time `/message` is called along with the last message.
