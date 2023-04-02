@@ -5,7 +5,7 @@ const isAuth = (ctx, next) => {
   try {
     const now = Date.now()
     const header = ctx.headers.authorization
-    if (ctx.request.url === '/login') {
+    if (ctx.request.url === '/login' || ctx.request.url === '/health') {
       return next()
     }
 

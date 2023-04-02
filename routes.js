@@ -33,6 +33,10 @@ router.post('/message', (ctx, next) => {
   }
 })
 
+router.get('/health', (ctx, next) => {
+  ctx.status = 200
+})
+
 module.exports = {
   router
 }
