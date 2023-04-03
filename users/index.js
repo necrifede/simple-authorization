@@ -2,7 +2,7 @@ const Router = require('@koa/router');
 const users = require('./users.json');
 const { createToken } = require('./utils');
 
-const router = new Router();
+const router = new Router({ prefix: '/api' });
 
 router.get('/login', (ctx, next) => {
   try {

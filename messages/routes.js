@@ -1,8 +1,8 @@
 
 const Router = require('@koa/router');
-const { update, write, read } = require('./messages')
+const { update, write, read } = require('.')
 
-const router = new Router();
+const router = new Router({ prefix: '/api' });
 
 router.get('/stats', (ctx, next) => {
 
