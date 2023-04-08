@@ -4,8 +4,8 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const serve = require("koa-static");
 const mount = require("koa-mount");
-const { router: messagesRoutes } = require('./messages/routes')
 const { router: userRoutes } = require('./users')
+const { router: messagesRoutes } = require('./messages/routes')
 const { cors } = require('./cors')
 const { isAuth } = require('./users/middlewares')
 

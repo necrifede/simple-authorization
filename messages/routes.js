@@ -20,8 +20,6 @@ router.get('/stats', async (ctx, next) => {
   } catch (error) {
     ctx.body = { succeed: false, message: `error: ${error}` };
     ctx.status = 401;
-  } finally {
-    await next()
   }
 });
 
@@ -38,15 +36,12 @@ router.post('/message', async (ctx, next) => {
   } catch (error) {
     ctx.body = { succeed: false, message: `error: ${error}` };
     ctx.status = 400;
-  } finally {
-    await next()
   }
 })
 
 router.get('/health', async (ctx, next) => {
   ctx.status = 200
   ctx.body = 'ok'
-  await next()
 })
 
 module.exports = {

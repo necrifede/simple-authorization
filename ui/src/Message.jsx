@@ -20,7 +20,7 @@ const initial = {
   message: '',
 };
 
-export const Message = ({ handleMessages }) => {
+export const Message = ({ handleMessages = () => {} }) => {
   const [{ from, to, message }, dispatch] = useReducer(reducer, initial);
 
   const sentForm = (value) => dispatch({ type: 'setFrom', payload: value });
