@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { host } from '../config';
 
 export const Stats = ({ token }) => {
   const [messages, setMessages] = useState({});
   const { numberOfCalls = 0, lastMessage: { from, to, message } = {} } = messages;
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/stats', {
+    fetch(`${host}/api/stats`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     })

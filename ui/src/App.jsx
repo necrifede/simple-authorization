@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Redirect, Link } from 'wouter';
+import { host } from '../config';
 import { Login } from './Login';
 import { Message } from './Message';
 import { Stats } from './Stats';
@@ -26,7 +27,7 @@ function App() {
 
   const handleAuthentication = ({ user, pwd }) => {
     const encodedCredentials = window.btoa(`${user}:${pwd}`);
-    fetch('http://localhost:3000/api/login', {
+    fetch(`${host}/api/login`, {
       method: 'GET',
       headers: { Authorization: `Basic ${encodedCredentials}` },
     })
@@ -40,7 +41,7 @@ function App() {
   };
 
   const handleMessages = ({ from, to, message }) => {
-    fetch('http://localhost:3000/api/message', {
+    fetch(`${host}/api/message`, {
       method: 'POST',
       body: JSON.stringify({ from, to, message }),
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
