@@ -1,12 +1,12 @@
 const { getUnixTime } = require("date-fns")
 const { decodeToken } = require("./utils")
 
-const isAuth = (ctx, next) => {
+const isAuth = async (ctx, next) => {
   try {
     const now = Date.now()
     const header = ctx.headers.authorization
-    if (ctx.request.url === '/api/login' || ctx.request.url === '/api/health') {
-      return next()
+    if (ctx.request.url === '/api/login' || ctx.request.url === '/api/health' || ctx.request.method === 'OPTIONS') {
+      return await next()
     }
 
     if (!/bearer/i.test(header)) {
@@ -23,11 +23,11 @@ const isAuth = (ctx, next) => {
 
     ctx.state.user = payload.sub
 
-    return next()
+    return await next()
 
   } catch (error) {
     ctx.status = 403
-    ctx.body = error?.message ?? 'Unknown user error'
+    ctx.body = { succeed: false, message: error?.message ?? 'Unknown user error' }
   }
 }
 

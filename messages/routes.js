@@ -1,10 +1,14 @@
 
 const Router = require('@koa/router');
-const { update, write, read } = require('.')
+const { update, write, read } = require('./index')
 
 const router = new Router({ prefix: '/api' });
 
-router.get('/stats', (ctx, next) => {
+router.options('/stats', (ctx, next) => {
+  ctx.status = 200
+})
+
+router.get('/stats', async (ctx, next) => {
 
   try {
     if (ctx.state.user !== 'admin') {
@@ -16,25 +20,33 @@ router.get('/stats', (ctx, next) => {
   } catch (error) {
     ctx.body = { succeed: false, message: `error: ${error}` };
     ctx.status = 401;
+  } finally {
+    await next()
   }
 });
 
-router.post('/message', (ctx, next) => {
+router.options('/message', (ctx, next) => {
+  ctx.status = 200
+})
+
+router.post('/message', async (ctx, next) => {
   try {
     const newStats = update(ctx.request.body)
     write(newStats)
-    ctx.status = 200;
     ctx.body = { succeed: true, message: `stats updated` };
+    ctx.status = 200;
   } catch (error) {
-    ctx.status = 400;
     ctx.body = { succeed: false, message: `error: ${error}` };
+    ctx.status = 400;
   } finally {
-    next()
+    await next()
   }
 })
 
-router.get('/health', (ctx, next) => {
+router.get('/health', async (ctx, next) => {
   ctx.status = 200
+  ctx.body = 'ok'
+  await next()
 })
 
 module.exports = {
